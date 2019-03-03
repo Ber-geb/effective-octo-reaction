@@ -1,0 +1,36 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\Debug\DA2AT1_Assem.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>DA2AT1_Assem.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>DA2AT1_Assem.map</FILE>
+  <FILE>DA2AT1_Assem.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <begin><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>12</LINE></begin>
+  <delayOn><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>21</LINE></delayOn>
+  <next><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>33</LINE></next>
+  <beginDelay><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>19</LINE></beginDelay>
+  <delay0><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>23</LINE></delay0>
+  <delay1><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>26</LINE></delay1>
+  <beginDelayOff><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>39</LINE></beginDelayOff>
+  <delayOff><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>41</LINE></delayOff>
+  <delay0Off><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>43</LINE></delay0Off>
+  <delay1Off><FILE>C:\Users\serak\Documents\Atmel Studio\7.0\DA2AT1_Assem\DA2AT1_Assem\main.asm</FILE><LINE>46</LINE></delay1Off>
+ </LABELS>
+</ASSEMBLER_INFO>
