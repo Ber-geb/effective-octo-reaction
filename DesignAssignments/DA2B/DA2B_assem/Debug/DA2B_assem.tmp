@@ -1,0 +1,33 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\Debug\DA2B_assem.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>DA2B_assem.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>DA2B_assem.map</FILE>
+  <FILE>DA2B_assem.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <MAIN><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>13</LINE></MAIN>
+  <EX0_ISR><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>30</LINE></EX0_ISR>
+  <HERE><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>27</LINE></HERE>
+  <delaySwitch><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>36</LINE></delaySwitch>
+  <delaySw0><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>38</LINE></delaySw0>
+  <delaySw1><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>40</LINE></delaySw1>
+  <delaySw2><FILE>c:\users\serak\Documents\Atmel Studio\7.0\DA2B_assem\DA2B_assem\main.asm</FILE><LINE>43</LINE></delaySw2>
+ </LABELS>
+</ASSEMBLER_INFO>
