@@ -3,31 +3,31 @@ DA2C_CT2_AT1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000198  2**0
+  0 .data         00000000  00800100  00800100  0000019c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000124  00000000  00000000  00000074  2**1
+  1 .text         00000128  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000004  00800100  00800100  00000198  2**0
+  2 .bss          00000004  00800100  00800100  0000019c  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000198  2**0
+  3 .comment      00000030  00000000  00000000  0000019c  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001c8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001cc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000028  00000000  00000000  00000208  2**0
+  5 .debug_aranges 00000028  00000000  00000000  0000020c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000006b9  00000000  00000000  00000230  2**0
+  6 .debug_info   000006b9  00000000  00000000  00000234  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000626  00000000  00000000  000008e9  2**0
+  7 .debug_abbrev 00000626  00000000  00000000  000008ed  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000238  00000000  00000000  00000f0f  2**0
+  8 .debug_line   00000238  00000000  00000000  00000f13  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000048  00000000  00000000  00001148  2**2
+  9 .debug_frame  00000048  00000000  00000000  0000114c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000035b  00000000  00000000  00001190  2**0
+ 10 .debug_str    0000036e  00000000  00000000  00001194  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000049  00000000  00000000  000014eb  2**0
+ 11 .debug_loc    00000049  00000000  00000000  00001502  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  00001534  2**0
+ 12 .debug_ranges 00000018  00000000  00000000  0000154b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -82,7 +82,7 @@ Disassembly of section .text:
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
   84:	0e 94 48 00 	call	0x90	; 0x90 <main>
-  88:	0c 94 90 00 	jmp	0x120	; 0x120 <_exit>
+  88:	0c 94 92 00 	jmp	0x124	; 0x124 <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -109,9 +109,9 @@ int main(void)
   a0:	84 b5       	in	r24, 0x24	; 36
   a2:	80 6c       	ori	r24, 0xC0	; 192
   a4:	84 bd       	out	0x24, r24	; 36
-	TCCR0B |= (1<<CS02) | (1<<CS00);
+	TCCR0B |= (1<<CS02);
   a6:	85 b5       	in	r24, 0x25	; 37
-  a8:	85 60       	ori	r24, 0x05	; 5
+  a8:	84 60       	ori	r24, 0x04	; 4
   aa:	85 bd       	out	0x25, r24	; 37
   ac:	ff cf       	rjmp	.-2      	; 0xac <main+0x1c>
 
@@ -130,56 +130,58 @@ ISR (TIMER0_OVF_vect){						//timer0 overflow interrupt
   b8:	8f 93       	push	r24
   ba:	9f 93       	push	r25
 
-	if (count0 == 27){						//two counters used
+	if (count0 == 106){						//two counters used
   bc:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <count0>
   c0:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <count0+0x1>
-  c4:	4b 97       	sbiw	r24, 0x1b	; 27
-  c6:	e1 f4       	brne	.+56     	; 0x100 <__vector_16+0x52>
+  c4:	8a 36       	cpi	r24, 0x6A	; 106
+  c6:	91 05       	cpc	r25, r1
+  c8:	e9 f4       	brne	.+58     	; 0x104 <__vector_16+0x56>
 		PORTB &= (0<<2);					//turn off led
-  c8:	85 b1       	in	r24, 0x05	; 5
-  ca:	15 b8       	out	0x05, r1	; 5
-		if (count1 == 18){
-  cc:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
-  d0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
-  d4:	42 97       	sbiw	r24, 0x12	; 18
-  d6:	51 f4       	brne	.+20     	; 0xec <__vector_16+0x3e>
+  ca:	85 b1       	in	r24, 0x05	; 5
+  cc:	15 b8       	out	0x05, r1	; 5
+		if (count1 == 71){
+  ce:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+  d2:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
+  d6:	87 34       	cpi	r24, 0x47	; 71
+  d8:	91 05       	cpc	r25, r1
+  da:	51 f4       	brne	.+20     	; 0xf0 <__vector_16+0x42>
 			PORTB |= (1<<2);				//turn on led
-  d8:	2a 9a       	sbi	0x05, 2	; 5
+  dc:	2a 9a       	sbi	0x05, 2	; 5
 			count0 = 0;						//reset counter
-  da:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <count0+0x1>
-  de:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <count0>
+  de:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <count0+0x1>
+  e2:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <count0>
 			count1 = 0;						//reset counter
-  e2:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
-  e6:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
-  ea:	13 c0       	rjmp	.+38     	; 0x112 <__vector_16+0x64>
+  e6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+  ea:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+  ee:	13 c0       	rjmp	.+38     	; 0x116 <__vector_16+0x68>
 		}
 		else
 			count1++;						//increment counter
-  ec:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
-  f0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
-  f4:	01 96       	adiw	r24, 0x01	; 1
-  f6:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
-  fa:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
-  fe:	09 c0       	rjmp	.+18     	; 0x112 <__vector_16+0x64>
+  f0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+  f4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
+  f8:	01 96       	adiw	r24, 0x01	; 1
+  fa:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+  fe:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 102:	09 c0       	rjmp	.+18     	; 0x116 <__vector_16+0x68>
 	}
 	else count0++;							//increment counter				
- 100:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <count0>
- 104:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <count0+0x1>
- 108:	01 96       	adiw	r24, 0x01	; 1
- 10a:	90 93 03 01 	sts	0x0103, r25	; 0x800103 <count0+0x1>
- 10e:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <count0>
+ 104:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <count0>
+ 108:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <count0+0x1>
+ 10c:	01 96       	adiw	r24, 0x01	; 1
+ 10e:	90 93 03 01 	sts	0x0103, r25	; 0x800103 <count0+0x1>
+ 112:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <count0>
 	
 }
- 112:	9f 91       	pop	r25
- 114:	8f 91       	pop	r24
- 116:	0f 90       	pop	r0
- 118:	0f be       	out	0x3f, r0	; 63
+ 116:	9f 91       	pop	r25
+ 118:	8f 91       	pop	r24
  11a:	0f 90       	pop	r0
- 11c:	1f 90       	pop	r1
- 11e:	18 95       	reti
+ 11c:	0f be       	out	0x3f, r0	; 63
+ 11e:	0f 90       	pop	r0
+ 120:	1f 90       	pop	r1
+ 122:	18 95       	reti
 
-00000120 <_exit>:
- 120:	f8 94       	cli
+00000124 <_exit>:
+ 124:	f8 94       	cli
 
-00000122 <__stop_program>:
- 122:	ff cf       	rjmp	.-2      	; 0x122 <__stop_program>
+00000126 <__stop_program>:
+ 126:	ff cf       	rjmp	.-2      	; 0x126 <__stop_program>

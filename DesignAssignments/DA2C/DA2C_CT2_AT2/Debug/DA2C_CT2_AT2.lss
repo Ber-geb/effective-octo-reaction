@@ -3,31 +3,31 @@ DA2C_CT2_AT2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000178  2**0
+  0 .data         00000000  00800100  00800100  00000182  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000104  00000000  00000000  00000074  2**1
+  1 .text         0000010e  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800100  00800100  00000178  2**0
+  2 .bss          00000002  00800100  00800100  00000182  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000178  2**0
+  3 .comment      00000030  00000000  00000000  00000182  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001a8  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001b4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000028  00000000  00000000  000001e8  2**0
+  5 .debug_aranges 00000028  00000000  00000000  000001f4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000006a8  00000000  00000000  00000210  2**0
+  6 .debug_info   000006a8  00000000  00000000  0000021c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000626  00000000  00000000  000008b8  2**0
+  7 .debug_abbrev 00000626  00000000  00000000  000008c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000238  00000000  00000000  00000ede  2**0
+  8 .debug_line   0000023e  00000000  00000000  00000eea  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000048  00000000  00000000  00001118  2**2
+  9 .debug_frame  00000048  00000000  00000000  00001128  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000354  00000000  00000000  00001160  2**0
+ 10 .debug_str    00000367  00000000  00000000  00001170  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000049  00000000  00000000  000014b4  2**0
+ 11 .debug_loc    00000049  00000000  00000000  000014d7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  000014fd  2**0
+ 12 .debug_ranges 00000018  00000000  00000000  00001520  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -49,7 +49,7 @@ Disassembly of section .text:
   34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
-  40:	0c 94 5b 00 	jmp	0xb6	; 0xb6 <__vector_16>
+  40:	0c 94 5f 00 	jmp	0xbe	; 0xbe <__vector_16>
   44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
   4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
@@ -82,7 +82,7 @@ Disassembly of section .text:
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
   84:	0e 94 48 00 	call	0x90	; 0x90 <main>
-  88:	0c 94 80 00 	jmp	0x100	; 0x100 <_exit>
+  88:	0c 94 85 00 	jmp	0x10a	; 0x10a <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -122,55 +122,60 @@ int main(void)
   b0:	2a 9a       	sbi	0x05, 2	; 5
 			TCNT0 = 0;
   b2:	16 bc       	out	0x26, r1	; 38
-  b4:	fb cf       	rjmp	.-10     	; 0xac <main+0x1c>
+			count0 = 0;
+  b4:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+  b8:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+  bc:	f7 cf       	rjmp	.-18     	; 0xac <main+0x1c>
 
-000000b6 <__vector_16>:
+000000be <__vector_16>:
 	}
    
 }
 
 
 ISR (TIMER0_OVF_vect){						//timer0 overflow interrupt
-  b6:	1f 92       	push	r1
-  b8:	0f 92       	push	r0
-  ba:	0f b6       	in	r0, 0x3f	; 63
-  bc:	0f 92       	push	r0
-  be:	11 24       	eor	r1, r1
-  c0:	8f 93       	push	r24
-  c2:	9f 93       	push	r25
+  be:	1f 92       	push	r1
+  c0:	0f 92       	push	r0
+  c2:	0f b6       	in	r0, 0x3f	; 63
+  c4:	0f 92       	push	r0
+  c6:	11 24       	eor	r1, r1
+  c8:	8f 93       	push	r24
+  ca:	9f 93       	push	r25
 	
 	if (count0 == 76){
-  c4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
-  c8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
-  cc:	8c 34       	cpi	r24, 0x4C	; 76
-  ce:	91 05       	cpc	r25, r1
-  d0:	39 f4       	brne	.+14     	; 0xe0 <__vector_16+0x2a>
+  cc:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+  d0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
+  d4:	8c 34       	cpi	r24, 0x4C	; 76
+  d6:	91 05       	cpc	r25, r1
+  d8:	41 f4       	brne	.+16     	; 0xea <__vector_16+0x2c>
 			PORTB &= (0<<2);
-  d2:	85 b1       	in	r24, 0x05	; 5
-  d4:	15 b8       	out	0x05, r1	; 5
+  da:	85 b1       	in	r24, 0x05	; 5
+  dc:	15 b8       	out	0x05, r1	; 5
 			count0 = 0;
-  d6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
-  da:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+  de:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+  e2:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
 			TCNT0 = 0;
-  de:	16 bc       	out	0x26, r1	; 38
+  e6:	16 bc       	out	0x26, r1	; 38
+  e8:	09 c0       	rjmp	.+18     	; 0xfc <__vector_16+0x3e>
 	}	
-	count0++;
-  e0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
-  e4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
-  e8:	01 96       	adiw	r24, 0x01	; 1
-  ea:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
-  ee:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+	else	
+		count0++;
+  ea:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+  ee:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
+  f2:	01 96       	adiw	r24, 0x01	; 1
+  f4:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+  f8:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
 }
-  f2:	9f 91       	pop	r25
-  f4:	8f 91       	pop	r24
-  f6:	0f 90       	pop	r0
-  f8:	0f be       	out	0x3f, r0	; 63
-  fa:	0f 90       	pop	r0
-  fc:	1f 90       	pop	r1
-  fe:	18 95       	reti
+  fc:	9f 91       	pop	r25
+  fe:	8f 91       	pop	r24
+ 100:	0f 90       	pop	r0
+ 102:	0f be       	out	0x3f, r0	; 63
+ 104:	0f 90       	pop	r0
+ 106:	1f 90       	pop	r1
+ 108:	18 95       	reti
 
-00000100 <_exit>:
- 100:	f8 94       	cli
+0000010a <_exit>:
+ 10a:	f8 94       	cli
 
-00000102 <__stop_program>:
- 102:	ff cf       	rjmp	.-2      	; 0x102 <__stop_program>
+0000010c <__stop_program>:
+ 10c:	ff cf       	rjmp	.-2      	; 0x10c <__stop_program>

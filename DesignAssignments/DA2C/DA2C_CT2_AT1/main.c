@@ -19,7 +19,7 @@ int main(void)
 	TCNT0 = 0x0;
 	sei();					//enable interrupts
 	TCCR0A |= (1<<COM0A1) | (1<<COM0A0);
-	TCCR0B |= (1<<CS02) | (1<<CS00);
+	TCCR0B |= (1<<CS02);
 	while (1){	
 	}
    
@@ -28,9 +28,9 @@ int main(void)
 
 ISR (TIMER0_OVF_vect){						//timer0 overflow interrupt
 
-	if (count0 == 27){						//two counters used
+	if (count0 == 106){						//two counters used
 		PORTB &= (0<<2);					//turn off led
-		if (count1 == 18){
+		if (count1 == 71){
 			PORTB |= (1<<2);				//turn on led
 			count0 = 0;						//reset counter
 			count1 = 0;						//reset counter

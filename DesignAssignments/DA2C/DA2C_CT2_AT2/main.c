@@ -24,6 +24,7 @@ int main(void)
 		if (!(PINC & (1<<PINC2))){		//check if PINC is set
 			PORTB |= (1<<2);
 			TCNT0 = 0;
+			count0 = 0;
 		}
 	}
    
@@ -37,7 +38,8 @@ ISR (TIMER0_OVF_vect){						//timer0 overflow interrupt
 			count0 = 0;
 			TCNT0 = 0;
 	}	
-	count0++;
+	else	
+		count0++;
 }
 
 
